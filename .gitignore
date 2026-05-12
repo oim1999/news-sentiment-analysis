@@ -1,3 +1,15 @@
-data
-.venv
-clean_env
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Generated outputs (optional — only if you don't want plots in git)
+outputs/
