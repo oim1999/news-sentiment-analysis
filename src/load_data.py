@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def load_data(filepath):
-    """Load a CSV file and return a clean, date-indexed DataFrame."""
+    """Load the raw analyst ratings file and return a clean, date-indexed DataFrame."""
     df = pd.read_csv(filepath, index_col=0)  # use the first column as the index
     df['date'] = pd.to_datetime(df['date'], format='mixed', utc=True)
     df['date'] = df['date'].dt.tz_localize(None)   # strip the -04:00 timezone
@@ -10,6 +10,18 @@ def load_data(filepath):
 
     print(f"Loaded {len(df)} rows from '{filepath}'")
     return df
+
+
+def load_trading_data(filepath):
+    """Load trading data from a CSV file and return a clean, date-indexed DataFrame."""
+    df = pd.read_csv(filepath, index_col=0)  # use the first column as the index
+    df['Date'] = pd.to_datetime(df['Date'], format='mixed', utc=True)
+    df['Date'] = df['Date'].dt.tz_localize(None)   # strip the -04:00 timezone
+    df['Date'] = df['Date'].dt.normalize() 
+
+    print(f"Loaded {len(df)} rows from '{filepath}'")
+    return df
+
 
 
 def remove_nulls(df):
